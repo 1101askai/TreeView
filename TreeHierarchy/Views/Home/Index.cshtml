@@ -1,0 +1,12 @@
+﻿@using TreeHierarchy.Models
+@using System.Collections.Generic
+@model List<TreeNode>
+@{
+    var nodes = (List<TreeNode>)Model;
+    <div class="row">
+        <h1>Directory tree</h1>
+    </div>
+    <div class="row">
+        @ListViewHelper.DisplayTree(nodes.Where(e => e.ParentID == 0).OrderBy(e => e.Id).ToList())
+    </div>
+}

@@ -1,0 +1,37 @@
+﻿@using TreeHierarchy.Models
+@helper DisplayTree(List<TreeNode> elements)
+{
+    <ul>
+        @foreach (var element in elements)
+        {
+            <li>
+                <a href="@element.Path">@element.Name</a>
+                @{
+                    var children = element.Children;
+                    if (children.Count() > 0)
+                    {
+                        @DisplayTree(children.ToList())
+                    }
+                }
+            </li>
+        }
+    </ul>
+}
+@helper DisplayChildTree(List<TreeNode> elements)
+{
+    if (elements.Count() == 0)
+    {
+        <div class="empty-childs-list">Current folder is empty</div>
+    }
+    else
+    {
+        <ul>
+            @foreach (var element in elements)
+            {
+                <li>
+                    <a href="@element.Path">@element.Name</a>
+                </li>
+            }
+        </ul>
+    }
+}
